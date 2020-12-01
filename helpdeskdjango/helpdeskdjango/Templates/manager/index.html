@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">Привет, родной</h1>
+        <p> Проведи </p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Читать больше &raquo;</a></p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        {% for employee in employees %}
+          
+        <div class="col-md-4">
+            <h2>{{ employee.surname }} {{ employee.first_name }} {{ employee.last_name }}</h2>
+            <p>{{ employee.birthday }}</p>
+            <p>{{ employee.fk_position }}</p>
+                <p><a class="btn btn-secondary" href="{{ employee.get_update_url }}" role="button">Подробнее &raquo;</a></p>
+            </div>
+        {% endfor %}
+            </div>
+
+    <div class="row">
+        {% for position in positions %}
+          
+        <div class="col-md-4">
+            <h3>{{ position.name }}
+            <p>{{ position.salary }}</p>
+                <p><a class="btn btn-secondary" href="{{ position.get_update_url }}" role="button">Подробнее &raquo;</a></p>
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="row">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ФИО</th>
+                <th scope="col">Дата рождения</th>
+                <th scope="col">Должность</th>
+                <th scope="col"></th>
+              </tr>
+            </thead> 
+            <tbody>
+                {% for employee in employees %}
+                <tr>
+                    <th scope="row">{{employee.id}}</th>
+                    <td>
+                        {{ employee.surname }} {{ employee.first_name }} {{ employee.last_name }}
+                    </td>
+                    <td>{{ employee.birthday }}</td>
+                    <td>{{ employee.fk_position }}</td>
+                    <th scope="col"><a class="btn btn-info" href="{{ employee.get_absolute_url }}">Открыть</a></th>
+                  </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
+
+</div> <!-- /container -->
+
+{% endblock content %}

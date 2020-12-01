@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+          
+        <div class="col-md-8">
+            <h2>{{ employee.surname }} {{ employee.first_name }} {{ employee.last_name }}</h2>
+            <p>{{ employee.birthday }}</p>
+            <p>{{ employee.fk_position }}</p>
+            
+            <form action= "{{ data.get_update_url }}" method="POST">
+            {% csrf_token %}
+            {%for field in form%}
+                {{field.label}}
+                {{field}}
+            {% endfor %}
+            <br>
+            <button class="btn btn-primary" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
+
+</div> <!-- /container -->
+{% endblock content %}

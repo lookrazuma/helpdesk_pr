@@ -1,0 +1,38 @@
+<!--  -->
+<!-- Основа html документа взята из Templates/base.html -->
+{% extends 'base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+{% block content %} 
+
+    <h1>Работа с задачами</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.title }} <br>
+        {{ form.host_name }} <br>
+        {{ form.dept }} <br>
+        {{ form.task }} <br>
+        <button type="submit" class="btn btn-success">Добавить</button>
+
+        <!-- Выводим текст ошибки из переменной -->
+        <span> {{ error }} </span>
+    </form>
+
+{% endblock %}
+
+{% block tasks %} 
+    {% if tasks %}
+        {% for el in  tasks%}
+            <div class="alert alert-warning mt-2">
+                <p> {{ el.status_task }} </p>
+                <h3> {{ el.title }} </h3>
+                <p> {{ el.host_name }} </p>
+                <p> {{ el.dept }} </p>
+                <p> {{ el.task }} </p>
+                <p> {{ el.author }} <p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p> Записи осутствуют </p>
+    {% endif %}
+{% endblock %}
